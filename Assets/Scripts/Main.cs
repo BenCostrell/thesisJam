@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Main : Scene<TransitionData> {
 
+    private Agent agent;
+
 	// Use this for initialization
 	void Start () {
         Services.MapManager.GenerateMap();
+
+        agent = Instantiate(Services.Prefabs.Agent, Services.Main.transform).GetComponent<Agent>();
 	}
 	
 	// Update is called once per frame

@@ -14,8 +14,8 @@ public class Tile : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+	{
 	}
 
     public void Init(Coord coord_)
