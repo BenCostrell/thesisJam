@@ -15,4 +15,8 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject resource;
     public GameObject Resource { get { return resource; } }
+
+    [SerializeField]
+    private GameObject agent;
+    public GameObject Agent { get { return agent; }}
 }
