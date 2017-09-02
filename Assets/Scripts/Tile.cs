@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
 
-    private Coord coord;
+    public Coord coord { get; private set; }
+    public Resource containedResource { get; private set; }
 
 	// Use this for initialization
 	void Start () {
@@ -29,5 +30,11 @@ public class Tile : MonoBehaviour {
         {
             mat.color = Color.gray;
         }
+    }
+
+    public void PlaceResource(Resource resource)
+    {
+        containedResource = resource;
+        resource.PlaceOnTile(this);
     }
 }
