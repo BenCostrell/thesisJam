@@ -96,6 +96,8 @@ public class MapManager : MonoBehaviour {
     {
         int quadsPerTileSqrt = Mathf.RoundToInt(Mathf.Sqrt(NavQuad.quadsPerTile));
         navQuads = new NavQuad[quadsPerTileSqrt * mapWidth, quadsPerTileSqrt * mapLength];
+
+        //make NavQuads
         foreach(Tile tile in map)
         {
             BoxCollider boxCol = tile.boxCol;
@@ -105,8 +107,8 @@ public class MapManager : MonoBehaviour {
                 {
                     Vector3 pos = new Vector3(
                         boxCol.bounds.min.x + (boxCol.bounds.size.x * ((float)i / quadsPerTileSqrt)),
-                        boxCol.bounds.min.y + (boxCol.bounds.size.y * ((float)j / quadsPerTileSqrt)),
-                        transform.position.z);
+                        transform.position.y,
+                        boxCol.bounds.min.z + (boxCol.bounds.size.z * ((float)j / quadsPerTileSqrt)));
                     NavQuad navQuad = new NavQuad(pos);
 
                     navQuads[(tile.coord.x * mapWidth) + i, (tile.coord.y * mapLength) + j] = 
@@ -115,6 +117,8 @@ public class MapManager : MonoBehaviour {
                 }
             }
         }
+
+        //find all neighbors of each NavQuads
         for (int i = 0; i < quadsPerTileSqrt * mapWidth; i++)
         {
             for (int j = 0; j < quadsPerTileSqrt * mapLength; j++)

@@ -11,7 +11,8 @@ public class Main : Scene<TransitionData> {
         Services.MapManager.GenerateMap();
 
         agent = Instantiate(Services.Prefabs.Agent, Services.Main.transform).GetComponent<Agent>();
-	}
+        agent.Walk();
+    }
 	
 	// Update is called once per frame
 	void Update () {
