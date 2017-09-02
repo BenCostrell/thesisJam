@@ -20,5 +20,14 @@ public class Tile : MonoBehaviour {
     {
         coord = coord_;
         transform.position = new Vector3(coord.x, 0, coord.y);
+        Material mat = GetComponent<MeshRenderer>().material;
+        if((coord.x + coord.y) % 2 == 0)
+        {
+            mat.color = Color.white;
+        }
+        else
+        {
+            mat.color = Color.gray;
+        }
     }
 }
