@@ -6,10 +6,11 @@ public class Tile : MonoBehaviour {
 
     public Coord coord { get; private set; }
     public Resource containedResource { get; private set; }
+    public List<NavQuad> navQuads;
+    public BoxCollider boxCol { get; private set; }
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -30,6 +31,8 @@ public class Tile : MonoBehaviour {
         {
             mat.color = Color.gray;
         }
+        boxCol = GetComponent<BoxCollider>();
+        navQuads = new List<NavQuad>();
     }
 
     public void PlaceResource(Resource resource)

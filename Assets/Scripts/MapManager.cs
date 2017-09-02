@@ -15,6 +15,7 @@ public class MapManager : MonoBehaviour {
     private int minResourceDist;
     [SerializeField]
     private int maxTriesProcGen;
+    private NavQuad[,] navQuads;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +41,7 @@ public class MapManager : MonoBehaviour {
             }
         }
         PlaceResources();
+        GenerateNavQuads();
     }
 
     Tile GetRandomTile()
@@ -89,5 +91,68 @@ public class MapManager : MonoBehaviour {
         }
     }
 
+
+    void GenerateNavQuads()
+    {
+        int quadsPerTileSqrt = Mathf.RoundToInt(Mathf.Sqrt(NavQuad.quadsPerTile));
+        navQuads = new NavQuad[quadsPerTileSqrt * mapWidth, quadsPerTileSqrt * mapLength];
+        foreach(Tile tile in map)
+        {
+            BoxCollider boxCol = tile.boxCol;
+            for (int i = 0; i < quadsPerTileSqrt; i++)
+            {
+                for (int j = 0; j < quadsPerTileSqrt; j++)
+                {
+                    Vector3 pos = new Vector3(
+                        boxCol.bounds.min.x + (boxCol.bounds.size.x * ((float)i / quadsPerTileSqrt)),
+                        boxCol.bounds.min.y + (boxCol.bounds.size.y * ((float)j / quadsPerTileSqrt)),
+                        transform.position.z);
+                    NavQuad navQuad = new NavQuad(pos);
+
+                    navQuads[(tile.coord.x * mapWidth) + i, (tile.coord.y * mapLength) + j] = 
+                        (navQuad);
+                    tile.navQuads.Add(navQuad);
+                }
+            }
+        }
+        for (int i = 0; i < quadsPerTileSqrt * mapWidth; i++)
+        {
+            for (int j = 0; j < quadsPerTileSqrt * mapLength; j++)
+            {
+                navQuads[i, j].neighbors = new List<NavQuad>();
+                if (i > 0)
+                {
+                    navQuads[i, j].neighbors.Add(navQuads[i - 1, j]);
+                }
+                if (i < quadsPerTileSqrt * mapWidth - 1)
+                {
+                    navQuads[i, j].neighbors.Add(navQuads[i + 1, j]);
+                }
+                if (j > 0)
+                {
+                    navQuads[i, j].neighbors.Add(navQuads[i, j - 1]);
+                }
+                if (j < quadsPerTileSqrt * mapLength - 1)
+                {
+                    navQuads[i, j].neighbors.Add(navQuads[i, j + 1]);
+                }
+            }
+        }
+    }
+
+    public NavQuad GetNavQuadClosestToPosition(Vector3 pos)
+    {
+        NavQuad closestNavQuad = null;
+        float closestDist = Mathf.Infinity;
+        foreach(NavQuad nq in navQuads)
+        {
+            if(Vector3.Distance(nq.position, pos) < closestDist)
+            {
+                closestNavQuad = nq;
+                closestDist = Vector3.Distance(nq.position, pos);
+            }
+        }
+        return closestNavQuad;
+    }
 
 }
