@@ -12,6 +12,12 @@ public class Main : Scene<TransitionData> {
         Services.MapManager.GenerateMap();
 
         agent = Instantiate(Services.Prefabs.Agent, Services.Main.transform).GetComponent<Agent>();
+        agent.Walk();
+
+		playerbases = new Playerbase[Services.GameManager.numPlayers];
+		for (int i = 0; i < Services.GameManager.numPlayers; i++){
+			playerbases[i] = Instantiate(Services.Prefabs.Playerbase, Services.Main.transform).GetComponent<Playerbase>();
+		}
 	}
 	
 	// Update is called once per frame
@@ -30,11 +36,3 @@ public class Main : Scene<TransitionData> {
         Services.MapManager = GetComponentInChildren<MapManager>();
     }
 }
-
-        agent.Walk();
-    }
-		playerbases = new Playerbase[Services.GameManager.numPlayers];
-		for (int i = 0; i < Services.GameManager.numPlayers; i++){
-			playerbases[i] = Instantiate(Services.Prefabs.Playerbase, Services.Main.transform).GetComponent<Playerbase>();
-		}
-	}
