@@ -17,3 +17,4 @@ MonoBehaviour:
   tile: {fileID: 1379394366756726, guid: 6f0c0f0c371fe414e8bf9958a90ccdaa, type: 2}
   resource: {fileID: 1580635555047902, guid: bf65c64791dd8de4c81dcb853adc0702, type: 2}
   agent: {fileID: 1461752827402618, guid: 7e5b9e2dca1d047bc94d8970ac6c83f8, type: 2}
+  playerbase: {fileID: 1526286463347014, guid: 6681ef793c7714f4eb7e374a89f2c8ef, type: 2}

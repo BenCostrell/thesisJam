@@ -5,14 +5,14 @@ using UnityEngine;
 public class Main : Scene<TransitionData> {
 
     private Agent agent;
+	private Playerbase[] playerbases;
 
 	// Use this for initialization
 	void Start () {
         Services.MapManager.GenerateMap();
 
         agent = Instantiate(Services.Prefabs.Agent, Services.Main.transform).GetComponent<Agent>();
-        agent.Walk();
-    }
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,3 +30,11 @@ public class Main : Scene<TransitionData> {
         Services.MapManager = GetComponentInChildren<MapManager>();
     }
 }
+
+        agent.Walk();
+    }
+		playerbases = new Playerbase[Services.GameManager.numPlayers];
+		for (int i = 0; i < Services.GameManager.numPlayers; i++){
+			playerbases[i] = Instantiate(Services.Prefabs.Playerbase, Services.Main.transform).GetComponent<Playerbase>();
+		}
+	}
