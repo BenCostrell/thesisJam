@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attractor : Buidling
+public class Attractor : Building
 {
     //  This building attracts the agent using x amount of force
     private float attractiveForce = 1.0f;
     
-    internal override void Create(Tile tile)
+    internal override void PlaceOnTile(Tile tile)
     {
+        _buildingName = BuildingType.ATTRACTOR;
         _tile = tile;
     }
 

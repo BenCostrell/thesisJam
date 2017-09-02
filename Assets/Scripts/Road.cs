@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-public class Road : Buidling
+public class Road : Building
 {
     //  This class adds X amount of move speed to the agent
 
-    internal override void Create(Tile tile)
+    internal override void PlaceOnTile(Tile tile)
     {
+        _buildingName = BuildingType.ROAD;
         _tile = tile;
     }
 

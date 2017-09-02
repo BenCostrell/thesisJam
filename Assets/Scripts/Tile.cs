@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour {
 
     public Coord coord { get; private set; }
     public Resource containedResource { get; private set; }
+    public Building containedBuilding { get; private set; }
     public List<NavQuad> navQuads;
     public BoxCollider boxCol { get; private set; }
 
@@ -40,4 +41,16 @@ public class Tile : MonoBehaviour {
         containedResource = resource;
         resource.PlaceOnTile(this);
     }
+
+    public void PlaceBuilding(Building building)
+    {
+        if(building.BuildingName != Building.BuildingType.BULLDOZER)
+        {
+            Debug.Assert(containedBuilding == null);
+        }
+       
+        containedBuilding = building;
+        building.PlaceOnTile(this);
+    }
+
 }

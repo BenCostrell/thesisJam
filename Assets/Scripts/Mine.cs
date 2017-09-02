@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public class Mine : Buidling
+public class Mine : Building
 {
     //  This class adds X amount of resource to the player
     //  every t seconds
 
     private float resourceGenPeriod = 3.0f;
 
-    internal override void Create(Tile tile)
+    internal override void PlaceOnTile(Tile tile)
     {
+        _buildingName = BuildingType.MINE;
         _tile = tile;
         GenerateResource();
     }

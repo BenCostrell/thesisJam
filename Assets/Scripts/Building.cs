@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 
-public abstract class Buidling : MonoBehaviour
+public abstract class Building : MonoBehaviour
 {
+    public enum BuildingType
+    {
+        ROAD,
+        MINE,
+        ATTRACTOR,
+        BULLDOZER,
+        ERROR
+    }
+
     protected float MIN_BUILDTIME = 1.0f;
     protected float MAX_BUILDTIME = 2.0f;
 
@@ -10,6 +19,13 @@ public abstract class Buidling : MonoBehaviour
     {
         get { return _isActive; }
         protected set { _isActive = value; }
+    }
+
+    [SerializeField] protected BuildingType _buildingName;
+    public BuildingType BuildingName
+    {
+        get { return _buildingName; }
+        protected set { _buildingName = value; }
     }
 
     [SerializeField] protected Tile _tile;
@@ -43,7 +59,7 @@ public abstract class Buidling : MonoBehaviour
 
     protected TaskManager _tm = new TaskManager();
 
-    internal virtual void Create(Tile _tile) { }
+    internal virtual void PlaceOnTile(Tile _tile) { }
 
     internal virtual void Demolish() { Destroy(this); }
 }
