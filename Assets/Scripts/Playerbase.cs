@@ -11,25 +11,22 @@ public class Playerbase : Attractor {
 	
 	public int owner;
 	public Color winnerColor;
-
-	private Vector3 startPos;
  
-	public void Init(int width, int length, int owner_)
+	public void Init(int owner_)
 	{
  		owner = owner_;
 		Material mat = GetComponent<MeshRenderer>().material;
-		if (width + length != 0) {
+		if (owner == 1) {
 			mat.color = Color.magenta;
 		} else {
 			mat.color = Color.cyan;
 		}
 		winnerColor = mat.color;
-		startPos = new Vector3 (width, 0.5f, length); 
+
  	}
 
 
  	void Start () {
- 		transform.position = startPos;
 	}
 	
  	void Update () {
