@@ -74,7 +74,8 @@ public class MapManager : MonoBehaviour {
             if (isValid)
             {
                 Resource resource = 
-                    Instantiate(Services.Prefabs.Resource).GetComponent<Resource>();
+                    Instantiate(Services.Prefabs.Resource, Services.Main.transform)
+                    .GetComponent<Resource>();
                 tile.PlaceResource(resource);
                 return tile;
             }
