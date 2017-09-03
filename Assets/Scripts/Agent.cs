@@ -68,7 +68,7 @@ public class Agent : MonoBehaviour {
         //    Vector3 differenceVector = attractor.transform.position - transform.position;
         //    Vector3 differenceDirection = differenceVector.normalized;
         //    float distance = differenceVector.magnitude;
-        //    Vector3 forceVector = differenceDirection * attractor.pullStrength *
+        //    Vector3 forceVector = differenceDirection * attractor.attractiveForce *
         //        (1 / Mathf.Pow(distance, 2));
         //    resultantForce += forceVector;
         //}
@@ -78,6 +78,9 @@ public class Agent : MonoBehaviour {
         //    targetPos.y,
         //    Mathf.Clamp(targetPos.z, 0, Services.MapManager.mapWidth));
         //speed = resultantForce.magnitude * baseSpeed;
+        //path = AStarSearch.ShortestPath(
+        //    Services.MapManager.GetNavQuadClosestToPosition(transform.position),
+        //    Services.MapManager.GetNavQuadClosestToPosition(targetPos));
     }
             
 }
