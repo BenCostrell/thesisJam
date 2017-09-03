@@ -32,8 +32,11 @@ public class Playerbase : MonoBehaviour {
 	}
 		
 	void OnTriggerEnter(Collider coll){
-		Debug.Log ("someone won!");
-		Services.SceneStackManager.Swap<WinScreen>();
+        if (coll.gameObject.GetComponent<Agent>() != null)
+        {
+            Debug.Log("someone won!");
+            Services.SceneStackManager.Swap<WinScreen>();
+        }
 	}
 
 }

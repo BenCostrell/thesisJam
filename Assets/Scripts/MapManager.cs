@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviour {
     private int mapWidth;
     [SerializeField]
     private int mapLength;
-    private List<Tile> map;
+    public List<Tile> map; //changed to public from private b/c need access
     [SerializeField]
     private int numResources;
     [SerializeField]

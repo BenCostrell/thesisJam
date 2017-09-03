@@ -10,7 +10,7 @@ public class Agent : MonoBehaviour {
     private List<NavQuad> path;
 
     void Awake(){
-        startingLocation = transform.position;
+        startingLocation = gameObject.transform.position;
         endLocation = new Vector3(9f, 0f, 9f);
 
         path = new List<NavQuad>();
