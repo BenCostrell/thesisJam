@@ -9,7 +9,7 @@ public class Agent : MonoBehaviour {
 
     private List<NavQuad> path;
 
-    private float baseSpeed = 0.001f;
+    private float baseSpeed = 0.05f;
     private float speed;
     private float startTime;
     private float journeyLength;
@@ -18,7 +18,7 @@ public class Agent : MonoBehaviour {
 
     void Awake(){
         startingLocation = gameObject.transform.position;
-        endLocation = new Vector3(9f, 0f, 9f);
+        endLocation = new Vector3(7f, 0f, 8f);
         prevPos = startingLocation;
 
         path = new List<NavQuad>();

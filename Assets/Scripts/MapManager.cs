@@ -126,9 +126,9 @@ public class MapManager : MonoBehaviour {
                         transform.position.y,
                         boxCol.bounds.min.z + (boxCol.bounds.size.z * ((float)j / quadsPerTileSqrt)));
                     NavQuad navQuad = new NavQuad(pos);
-
-                    navQuads[(tile.coord.x * mapWidth) + i, (tile.coord.y * mapLength) + j] = 
-                        (navQuad);
+                    int x = tile.coord.x * quadsPerTileSqrt + i;
+                    int y = tile.coord.y * quadsPerTileSqrt + j;
+                    navQuads[x, y] = (navQuad);
                     tile.navQuads.Add(navQuad);
                 }
             }
@@ -139,6 +139,7 @@ public class MapManager : MonoBehaviour {
         {
             for (int j = 0; j < quadsPerTileSqrt * mapLength; j++)
             {
+               // Debug.Log(i+", "+j+" "+navQuads[i, j]);
                 navQuads[i, j].neighbors = new List<NavQuad>();
                 if (i > 0)
                 {
@@ -156,6 +157,21 @@ public class MapManager : MonoBehaviour {
                 {
                     navQuads[i, j].neighbors.Add(navQuads[i, j + 1]);
                 }
+                /* diagonals */
+                if(i > 0 && j > 0){
+                    navQuads[i, j].neighbors.Add(navQuads[i - 1, j - 1]);
+                }
+                if(i > 0 && j < quadsPerTileSqrt * mapLength - 1){
+                    navQuads[i, j].neighbors.Add(navQuads[i - 1, j + 1]);
+                }
+                if(j > 0 && i < quadsPerTileSqrt * mapWidth - 1){
+                    navQuads[i, j].neighbors.Add(navQuads[i + 1, j - 1]);
+                }
+                if(i < quadsPerTileSqrt * mapWidth - 1 && j < quadsPerTileSqrt * mapLength - 1){
+                    navQuads[i, j].neighbors.Add(navQuads[i + 1, j + 1]);
+                }
+
+
             }
         }
     }
