@@ -7,7 +7,8 @@ public class NavQuad {
     public readonly Vector3 position;
     public List<NavQuad> neighbors;
     public float movementCost;
-    public const int quadsPerTile = 100; //always has to be a square number
+    public const int quadsPerTile = 400; //always has to be a square number
+    //public const int quadsPerTile = 100000;
 
 	public NavQuad(Vector3 position_)
     {
