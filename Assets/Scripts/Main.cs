@@ -11,7 +11,9 @@ public class Main : Scene<TransitionData> {
 	void Start () {
         Services.MapManager.GenerateMap();
 
-        agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[Services.MapManager.CenterIndexOfGrid()].gameObject.transform).GetComponent<Agent>();
+		IntVector2 center = Services.MapManager.CenterIndexOfGrid ();
+
+		agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[center.x,center.y].gameObject.transform).GetComponent<Agent>();
         agent.Walk();
 	}
 	
@@ -20,14 +22,16 @@ public class Main : Scene<TransitionData> {
 		
 	}
 
-    internal override void OnEnter(TransitionData data)
-    {
-        InitializeServices();
-    }
-
     void InitializeServices()
     {
         Services.Main = this;
         Services.MapManager = GetComponentInChildren<MapManager>();
     }
+
+		
+    internal override void OnEnter(TransitionData data)
+    {
+        InitializeServices();
+		Services.GameManager.currentCamera = GetComponentInChildren<Camera> ();
+	}
 }

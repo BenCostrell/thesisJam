@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneRoot: {fileID: 975070295}
+  currentCamera: {fileID: 0}
   numPlayers: 2
   playerSpawns:
   - {x: -5, y: 0, z: 0}

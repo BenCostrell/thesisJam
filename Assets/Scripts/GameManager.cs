@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject sceneRoot;
 
+	public Camera currentCamera;
+
     public int numPlayers;
     public List<Player> players { get; private set; }
     public Vector3[] playerSpawns;

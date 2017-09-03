@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour {
         }
         else
         {
-            mat.color = Color.gray;
+			mat.color = new Color(0.95f, 0.95f, 0.95f, 1f);
         }
         boxCol = GetComponent<BoxCollider>();
         navQuads = new List<NavQuad>();

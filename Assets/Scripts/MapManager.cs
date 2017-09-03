@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour {
 
-    [SerializeField]
-    private int mapWidth;
-    [SerializeField]
-    private int mapLength;
-    public List<Tile> map; //changed to public from private b/c need access
+ 
+	public int mapWidth;
+  	public int mapLength;
+	public Tile[,] map;
+
     [SerializeField]
     private int numResources;
     [SerializeField]
@@ -17,9 +17,11 @@ public class MapManager : MonoBehaviour {
     private int maxTriesProcGen;
     private NavQuad[,] navQuads;
 
+
+
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
@@ -27,27 +29,28 @@ public class MapManager : MonoBehaviour {
 		
 	}
 
-    public void GenerateMap()
-    {
-        map = new List<Tile>();
-        for (int i = 0; i < mapWidth; i++)
-        {
-            for (int j = 0; j < mapLength; j++)
-            {
-                Tile tile = Instantiate(Services.Prefabs.Tile, Services.Main.transform)
-                    .GetComponent<Tile>();
-                tile.Init(new Coord(i, j));
-                map.Add(tile);
-            }
-        }
-        PlaceResources();
-        GenerateNavQuads();
+
+	public void GenerateMap()
+	{
+		map =  new Tile[mapWidth,mapLength];
+		for (int i = 0; i < mapWidth; i++)
+		{
+			for (int j = 0; j < mapLength; j++)
+			{
+				Tile tile = Instantiate(Services.Prefabs.Tile, Services.Main.transform)
+					.GetComponent<Tile>();
+				tile.Init(new Coord(i, j));
+				map[i,j] = tile;
+			}
+		}
+		PlaceResources();
+		GenerateNavQuads();
 		PlaceBases ();
-    }
+	}
 
     Tile GetRandomTile()
     {
-        return map[Random.Range(0, map.Count)];
+		return map[Random.Range(0, mapWidth), Random.Range(0, mapLength) ];
     }
 
     bool ValidateTile(Tile tile)
@@ -172,12 +175,10 @@ public class MapManager : MonoBehaviour {
         return closestNavQuad;
     }
 
-    public int CenterIndexOfGrid(){
+    public IntVector2 CenterIndexOfGrid(){
 
-        int middle = mapWidth / 2;
-
-        int index = middle + mapWidth * middle;
-        return index;
+      
+		return new IntVector2 (mapWidth/2, mapLength/2);
     }
 
 
