@@ -45,6 +45,7 @@ public class Attractor : Building
 
     internal override void Demolish()
     {
+        Services.BuildingManager.Attractors.Remove(this);
         base.Demolish();
     }
 

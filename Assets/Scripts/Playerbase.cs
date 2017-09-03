@@ -24,6 +24,12 @@ public class Playerbase : Attractor {
         }
     }
     public Color winnerColor;
+    [SerializeField] private List<Building> ownedBuildings;
+    public List<Building> OwnedBuildings
+    {
+        get { return ownedBuildings; }
+    }
+
  
 	public void Init(int owner_)
 	{

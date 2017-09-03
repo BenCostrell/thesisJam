@@ -15,9 +15,9 @@ public class Bulldozer : Building
 
     internal override void OnPlacedOnTile()
     {
-        if (_parentTile.containedBuilding)
+        if (_parentTile.containedBuilding != null)
         {
-            Bulldoze(_parentTile.containedBuilding);
+            //Bulldoze(_parentTile.containedBuilding);
         }
     }
 

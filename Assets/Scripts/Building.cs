@@ -86,11 +86,16 @@ public abstract class Building : MonoBehaviour
     internal virtual void PlaceOnTile(Tile tile, Playerbase owner)
     {
         _owner = owner;
+        Owner.OwnedBuildings.Add(this);
         _parentTile = tile;
         transform.position = tile.transform.position + placementOffset;
     }
 
     internal virtual void OnPlacedOnTile() { }
 
-    internal virtual void Demolish() { Destroy(this.gameObject); }
+    internal virtual void Demolish()
+    {
+        Owner.OwnedBuildings.Remove(this);
+        Destroy(gameObject);
+    }
 }

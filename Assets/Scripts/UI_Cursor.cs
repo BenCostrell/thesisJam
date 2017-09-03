@@ -50,7 +50,7 @@ public class UI_Cursor : MonoBehaviour {
     private bool usingAxis = false;
 
 	private float t;
-	private float delay = 0.3f;
+	private float delay = 0.5f;
 
     void Start () {
 		maxX = Services.MapManager.mapWidth - 1;
@@ -60,7 +60,7 @@ public class UI_Cursor : MonoBehaviour {
 
 		buildingCursor = GameObject.Find ("BuildingCursor");
 
-		buildingCursor.SetActive (false);
+//		buildingCursor.SetActive (true);
 
 	}
 
@@ -70,7 +70,7 @@ public class UI_Cursor : MonoBehaviour {
         Debug.Log("cursor pos x " + X + ", cursor pos y " + Y);
         GetTileBuildingInfo ();
 
-		Vector3 tilePos = Services.GameManager.currentCamera.WorldToScreenPoint (Services.MapManager.map[offsetX,offsetY].transform.position);
+		Vector3 tilePos = Services.GameManager.currentCamera.WorldToScreenPoint (Services.MapManager.map[X,Y].transform.position);
 
 		transform.position = tilePos;
 
@@ -86,7 +86,7 @@ public class UI_Cursor : MonoBehaviour {
 			angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
 
 
-			if (angle >= 0 && angle < 30) {
+			if (angle >= 0 && angle < 22.5) {
 
 				if (!usingAxis) {
 					Y--;
@@ -95,13 +95,13 @@ public class UI_Cursor : MonoBehaviour {
 					usingAxis = true;
 				}
 
-			} else if (angle >= 30 && angle <= 60) {
+			} else if (angle >= 22.5f && angle <= 67.5f) {
 				if (!usingAxis) {
 					Y--;
 					usingAxis = true;
 				}
 
-			} else if (angle > 60 && angle < 120) {
+			} else if (angle > 67.5f && angle < 112.5f) {
 				
 				if (!usingAxis) {
 					X++;
@@ -109,7 +109,7 @@ public class UI_Cursor : MonoBehaviour {
 					usingAxis = true;
 				}
 
-			} else if (angle >= 120 && angle <= 150) {
+			} else if (angle >= 112.5f && angle <= 157.5) {
 
 				if (!usingAxis) {
 					X++;
@@ -117,7 +117,7 @@ public class UI_Cursor : MonoBehaviour {
 				}
 
 				
-			} else if (angle > 150 && angle <= 180) {
+			} else if (angle > 157.5 && angle <= 180f) {
 
 				if (!usingAxis) {
 					Y++;
@@ -125,7 +125,7 @@ public class UI_Cursor : MonoBehaviour {
 					usingAxis = true;
 				}
 
-			} else if (angle >= -180 && angle < -150) {
+			} else if (angle >= -180f && angle < -157.5) {
 
 				if (!usingAxis) {
 					Y++;
@@ -133,14 +133,14 @@ public class UI_Cursor : MonoBehaviour {
 					usingAxis = true;
 				}
 
-			} else if (angle >= -150 && angle <= -120) {
+			} else if (angle >= -157.5f && angle <= -112.5f) {
 
 				if (!usingAxis) {
 					Y++;
 					usingAxis = true;
 				}
 					
-			} else if (angle > -120 && angle < -60) {
+			} else if (angle > -112.5f && angle < -67.5f) {
 
 				if (!usingAxis) {
 					X--;
@@ -148,14 +148,14 @@ public class UI_Cursor : MonoBehaviour {
 					usingAxis = true;
 				}
 
-			} else if (angle >= -60 && angle <= -30) {
+			} else if (angle >= -67.5f && angle <= -22.5) {
 
 				if (!usingAxis) {
 					X--;
 					usingAxis = true;
 				}
 
-			} else if (angle > -30 && angle < 0) {
+			} else if (angle > -22.5 && angle < 0) {
 
 				if (!usingAxis) {
 					Y--;
@@ -185,7 +185,8 @@ public class UI_Cursor : MonoBehaviour {
 
 	void GetTileBuildingInfo(){
 
-		if (Services.MapManager.map [offsetX, offsetY].containedBuilding != null) {
+
+		if (Services.MapManager.map [X, Y].containedBuilding != null) {
 			buildingCursor.GetComponent<Image> ().color = Color.red;
 			
 		} else {
@@ -197,7 +198,17 @@ public class UI_Cursor : MonoBehaviour {
 
 	void OnButtonPressed(ButtonPressed e){
 		if (e.button == "B") {
-			buildingCursor.SetActive (true);
+			if (Services.MapManager.map [X, Y].containedBuilding != null) {
+				Building containedBuilding = Services.MapManager.map [X, Y].containedBuilding;
+				if (containedBuilding is Attractor) {
+					Attractor containedAttractor = containedBuilding as Attractor;
+					containedAttractor.IsOn = !containedAttractor.IsOn;
+				}
+
+			} else {
+				Services.Construt.PlaceBuildingOnTile (0, Services.MapManager.map [X, Y]);
+			}
+//			buildingCursor.SetActive (true);
 		}
 	}
 }
