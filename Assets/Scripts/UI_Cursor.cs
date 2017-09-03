@@ -86,92 +86,83 @@ public class UI_Cursor : MonoBehaviour {
 
 
 			if (angle >= 0 && angle < 30) {
-				if (offsetY > 0 && offsetY > 0) {
-					if (!usingAxis) {
-						offsetY--;
-						offsetX--;
 
-						usingAxis = true;
-					}
-				} 
+				if (!usingAxis) {
+					Y--;
+					X--;
+
+					usingAxis = true;
+				}
 
 			} else if (angle >= 30 && angle <= 60) {
-				if (offsetY > 0) {
-					if (!usingAxis) {
-						offsetY--;
-						usingAxis = true;
-					}
-
+				if (!usingAxis) {
+					Y--;
+					usingAxis = true;
 				}
+
 			} else if (angle > 60 && angle < 120) {
-
-				if (offsetX < maxX && offsetY > 0) {
-					if (!usingAxis) {
-						offsetX++;
-						offsetY--;
-						usingAxis = true;
-					}
+				
+				if (!usingAxis) {
+					X++;
+					Y--;
+					usingAxis = true;
 				}
+
 			} else if (angle >= 120 && angle <= 150) {
-				if ( offsetX < maxX) {
-					if (!usingAxis) {
-						offsetX++;
-						usingAxis = true;
-					}
 
+				if (!usingAxis) {
+					X++;
+					usingAxis = true;
 				}
+
 				
 			} else if (angle > 150 && angle <= 180) {
-				if (offsetY < maxY && offsetX < maxX) {
-					if (!usingAxis) {
-						offsetY++;
-						offsetX++;
-						usingAxis = true;
-					}
 
+				if (!usingAxis) {
+					Y++;
+					X++;
+					usingAxis = true;
 				}
+
 			} else if (angle >= -180 && angle < -150) {
-				if (offsetY < maxY && offsetX < maxX) {
-					if (!usingAxis) {
-						offsetY++;
-						offsetX++;
-						usingAxis = true;
-					}
 
+				if (!usingAxis) {
+					Y++;
+					X++;
+					usingAxis = true;
 				}
+
 			} else if (angle >= -150 && angle <= -120) {
-				if (offsetY < maxY) {
-					if (!usingAxis) {
-						offsetY++;
-						usingAxis = true;
-					}
 
+				if (!usingAxis) {
+					Y++;
+					usingAxis = true;
 				}
+					
 			} else if (angle > -120 && angle < -60) {
-				if (offsetX > 0 && offsetY < maxY) {
-					if (!usingAxis) {
-						offsetX--;
-						offsetY++;
-						usingAxis = true;
-					}
+
+				if (!usingAxis) {
+					X--;
+					Y++;
+					usingAxis = true;
 				}
+
 			} else if (angle >= -60 && angle <= -30) {
-				if (offsetX > 0 ) {
-					if (!usingAxis) {
-						offsetX--;
-						usingAxis = true;
-					}
 
+				if (!usingAxis) {
+					X--;
+					usingAxis = true;
 				}
-			} else if (angle > -30 && angle < 0) {
-				if (offsetY > 0 && offsetX > 0) {
-					if (!usingAxis) {
-						offsetY--;
-						offsetX--;
 
-						usingAxis = true;
-					}
-				} 
+			} else if (angle > -30 && angle < 0) {
+
+				if (!usingAxis) {
+					Y--;
+					X--;
+
+					usingAxis = true;
+				}
+	
 			}
 		}
         else
