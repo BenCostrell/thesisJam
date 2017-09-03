@@ -28,6 +28,7 @@ public class Playerbase : Attractor {
 	public void Init(int owner_)
 	{
         BuildingName = BuildingType.ATTRACTOR;
+        attractiveForce = 10f;
         Owner = this;
  		owner = owner_;
 		Material mat = GetComponent<MeshRenderer>().material;
