@@ -92,7 +92,6 @@ public class MapManager : MonoBehaviour {
         {
             Tile resourceTile = PlaceResourceOnTile();
             if (resourceTile == null) break;
-            Debug.Log("making resource number " + i);
         }
     }
 		

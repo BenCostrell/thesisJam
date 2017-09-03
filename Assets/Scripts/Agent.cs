@@ -9,11 +9,14 @@ public class Agent : MonoBehaviour {
 
     private List<NavQuad> path;
 
-    private float baseSpeed = 0.05f;
+    private float baseSpeed = 0.5f;
     private float speed;
-    private float startTime;
     private float journeyLength;
+    private float timeElapsedBetweenNodes;
+    private float expectedNodeJourneyDuration;
     private Vector3 prevPos;
+    private Vector3 targetPos;
+    private bool pathStarted;
 
 
     void Awake(){
@@ -26,29 +29,31 @@ public class Agent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        startTime = Time.time;
-       // journeyLength = Vector3.Distance(startingLocation, endLocation);
+        speed = baseSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
-        if(path.Count != 0 && transform.position != path[0].position){
-            float distCovered = (Time.time - startTime) * baseSpeed;
-            journeyLength = Vector3.Distance(path[0].position, transform.position);
-            /*if (path.Count > 1)
-            {
-                journeyLength = Vector3.Distance(path[0].position, path[1].position);
-            } else{
-                journeyLength = transform.
-            }*/
-            float fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(prevPos, path[0].position, fracJourney);
+        if (pathStarted && transform.position != targetPos)
+        {
+            timeElapsedBetweenNodes += Time.deltaTime;
+            transform.position = Vector3.Lerp(prevPos, targetPos,
+                timeElapsedBetweenNodes / expectedNodeJourneyDuration);
+        }
+        else if (path.Count != 0)
+        {
+            targetPos = path[0].position;
+            timeElapsedBetweenNodes = 0;
+            expectedNodeJourneyDuration =
+                Vector3.Distance(targetPos, transform.position) / speed;
+            Debug.Log(expectedNodeJourneyDuration);
             prevPos = transform.position;
-        } //else if (path.Count != 0 && transform.position == path[0].position)
+            path.Remove(path[0]);
+            pathStarted = true;
+        }
         else
         {
-			path.Remove(path[0]);
+            pathStarted = false;
         }
 	}
 
