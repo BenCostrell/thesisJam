@@ -86,7 +86,7 @@ public class Agent : MonoBehaviour {
             Vector3 differenceDirection = differenceVector.normalized;
             float distance = Mathf.Max(differenceVector.magnitude, 0.1f);
             Vector3 forceVector = differenceDirection * attractor.AttractiveForce *
-                (1 / Mathf.Pow(distance, 2));
+                (1 / Mathf.Pow(distance, 1));
             resultantForce += forceVector;
             Debug.Log("adding force " + resultantForce);
         }

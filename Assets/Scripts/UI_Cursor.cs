@@ -40,7 +40,7 @@ public class UI_Cursor : MonoBehaviour {
             {
                 offsetY = 0;
             }
-            else if (offsetX > maxY)
+            else if (offsetY > maxY)
             {
                 offsetY = maxY;
             }
@@ -67,7 +67,8 @@ public class UI_Cursor : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		GetTileBuildingInfo ();
+        Debug.Log("cursor pos x " + X + ", cursor pos y " + Y);
+        GetTileBuildingInfo ();
 
 		Vector3 tilePos = Services.GameManager.currentCamera.WorldToScreenPoint (Services.MapManager.map[offsetX,offsetY].transform.position);
 
