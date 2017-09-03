@@ -197,25 +197,24 @@ public class UI_Cursor : MonoBehaviour {
 	}
 
 	void OnButtonPressed(ButtonPressed e){
-		if (e.button == "B") {
-			if (Services.MapManager.map [X, Y].containedBuilding != null) {
-				Building containedBuilding = Services.MapManager.map [X, Y].containedBuilding;
-				if (containedBuilding is Attractor) {
-					Attractor containedAttractor = containedBuilding as Attractor;
-					containedAttractor.IsOn = !containedAttractor.IsOn;
-				}
-
-			} else {
+		if (e.button == "B")  {
                 TryToBuild(0);
 			}
 
-		}
-
 		if (e.button == "A") {
-            TryToBuild(1);
+		if (Services.MapManager.map [X, Y].containedBuilding != null) {
+			Building containedBuilding = Services.MapManager.map [X, Y].containedBuilding;
+			if (containedBuilding is Attractor) {
+				Attractor containedAttractor = containedBuilding as Attractor;
+				containedAttractor.IsOn = !containedAttractor.IsOn;
+			}
+
+		} else{
+			TryToBuild(1);
 
 	
 		}
+	}
 
 		if (e.button == "X") {
 			if (Services.MapManager.map [X, Y].containedBuilding != null) {
