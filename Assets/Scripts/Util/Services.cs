@@ -12,4 +12,5 @@ public static class Services {
     public static Main Main { get; set; }
     public static MapManager MapManager { get; set; }
     public static BuildingManager BuildingManager { get; set; }
+	public static Construt Construt { get; set; }
 }

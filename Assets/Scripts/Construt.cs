@@ -5,10 +5,10 @@ using UnityEngine;
 public class Construt : MonoBehaviour
 {
     //-----------TEMP CODE FOR BUILDING SPAWNING------------//
-    private const int ATTRACTOR = 0;
-    private const int BULLDOZER = 1;
-    private const int MINE = 2;
-    private const int ROAD = 3;
+	public const int ATTRACTOR = 0;
+	public const int BULLDOZER = 1;
+	public const int MINE = 2;
+	public const int ROAD = 3;
 
     [SerializeField] private Playerbase owner;
 
