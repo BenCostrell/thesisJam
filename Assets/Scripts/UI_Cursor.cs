@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Cursor : MonoBehaviour {
 
 	private float angle;
+
+	GameObject buildingCursor;
 
 	[SerializeField] private int offsetX = 0;
     public int X
@@ -53,15 +56,26 @@ public class UI_Cursor : MonoBehaviour {
 		maxX = Services.MapManager.mapWidth - 1;
 		maxY = Services.MapManager.mapLength - 1;
 
+		Services.EventManager.Register<ButtonPressed> (OnButtonPressed);
+
+		buildingCursor = GameObject.Find ("BuildingCursor");
+
+		buildingCursor.SetActive (false);
+
 	}
 
 	// Update is called once per frame
 	void Update ()
     {
+		GetTileBuildingInfo ();
 
 		Vector3 tilePos = Services.GameManager.currentCamera.WorldToScreenPoint (Services.MapManager.map[offsetX,offsetY].transform.position);
 
 		transform.position = tilePos;
+
+		if (buildingCursor != null) {
+			buildingCursor.transform.position = transform.position;
+		}
 
 		float x = Input.GetAxisRaw("Horizontal");
 		float y = Input.GetAxisRaw("Vertical");
@@ -174,6 +188,24 @@ public class UI_Cursor : MonoBehaviour {
 				t = 0;
 				usingAxis = false;
 			}
+		}
+	}
+
+	void GetTileBuildingInfo(){
+
+		if (Services.MapManager.map [offsetX, offsetY].containedBuilding != null) {
+			buildingCursor.GetComponent<Image> ().color = Color.red;
+			
+		} else {
+			buildingCursor.GetComponent<Image> ().color = Color.white;
+		}
+			
+		
+	}
+
+	void OnButtonPressed(ButtonPressed e){
+		if (e.button == "B") {
+			buildingCursor.SetActive (true);
 		}
 	}
 }
