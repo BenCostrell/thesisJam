@@ -7,11 +7,11 @@ public class Mine : Building
 
     private float resourceGenPeriod = 3.0f;
 
-    internal override void PlaceOnTile(Tile tile)
+    internal override void PlaceOnTile(Tile _tile, Playerbase _owner)
     {
-        base.PlaceOnTile(tile);
+        base.PlaceOnTile(_tile, _owner);
         _buildingName = BuildingType.MINE;
-        parentTile = tile;
+        _parentTile = _tile;
         OnPlacedOnTile();
     }
 
@@ -29,6 +29,7 @@ public class Mine : Building
     {
         //  Sends message to player to add one resource
         TaskTree genResourcesTaskTree = new TaskTree(new WaitTask(resourceGenPeriod));
+        Owner.numResources++;
         genResourcesTaskTree.Then(new ActionTask(GenerateResource));
         //  To do additional things just add more thens
         //  Add child to make other things happen as a result of a task

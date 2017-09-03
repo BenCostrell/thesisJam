@@ -10,10 +10,25 @@ public class Playerbase : Attractor {
 	*/
 	
 	public int owner;
-	public Color winnerColor;
+    [SerializeField] private int numResources_;
+    public int numResources
+    {
+        get
+        {
+            return numResources_;
+        }
+        set
+        {
+            numResources_ = value;
+            //resourceUI.text = value.ToString();
+        }
+    }
+    public Color winnerColor;
  
 	public void Init(int owner_)
 	{
+        BuildingName = BuildingType.ATTRACTOR;
+        Owner = this;
  		owner = owner_;
 		Material mat = GetComponent<MeshRenderer>().material;
 		if (owner == 1) {

@@ -19,11 +19,11 @@ public class Attractor : Building
     public float AttractiveForce { get { return attractiveForce; } }
     private float attractiveForce = 100.0f;
 
-    internal override void PlaceOnTile(Tile tile)
+    internal override void PlaceOnTile(Tile _tile, Playerbase _owner)
     {
-        base.PlaceOnTile(tile);
+        base.PlaceOnTile(_tile, _owner);
         _buildingName = BuildingType.ATTRACTOR;
-        parentTile = tile;
+        _parentTile = _tile;
         OnPlacedOnTile();
     }
 

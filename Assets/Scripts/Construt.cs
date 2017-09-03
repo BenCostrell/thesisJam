@@ -10,6 +10,8 @@ public class Construt : MonoBehaviour
     private const int MINE = 2;
     private const int ROAD = 3;
 
+    [SerializeField] private Playerbase owner;
+
     private UI_Cursor cursor;
     public UI_Cursor Cursor
     {
@@ -17,13 +19,13 @@ public class Construt : MonoBehaviour
         private set { }
     }
 
-    private const string MAP_MANAGER = "MapManager";
-    private MapManager mapManager;
+    private const string PLAYER = "Playerbase(Clone)";
 
 	// Use this for initialization
 	void Start ()
     {
         cursor = GetComponent<UI_Cursor>();
+        owner = GameObject.Find(PLAYER).GetComponent<Playerbase>();
 	}
 
     public void PlaceBuildingOnTile(int buildingIndex, Tile tile)
@@ -31,8 +33,10 @@ public class Construt : MonoBehaviour
         Building newBuilding = Instantiate(Services.Prefabs.BuildingTypes[buildingIndex], Services.Main.transform).GetComponent<Building>();
 
         Debug.Log(tile.coord.x + ", " + tile.coord.y);
+        tile.PlaceBuilding(newBuilding);
+        newBuilding.PlaceOnTile(tile, owner);
         Services.BuildingManager.AddBuilding(newBuilding);
-        newBuilding.PlaceOnTile(tile);
+        
     }
 
     // Update is called once per frame

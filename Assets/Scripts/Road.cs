@@ -4,11 +4,11 @@ public class Road : Building
 {
     //  This class adds X amount of move speed to the agent
 
-    internal override void PlaceOnTile(Tile tile)
+    internal override void PlaceOnTile(Tile _tile, Playerbase _owner)
     {
-        base.PlaceOnTile(tile);
+        base.PlaceOnTile(_tile, _owner);
         _buildingName = BuildingType.ROAD;
-        parentTile = tile;
+        _parentTile = _tile;
         OnPlacedOnTile();
     }
 

@@ -9,14 +9,12 @@ public class BuildingManager : MonoBehaviour
     public List<Building> BuildingList
     {
         get { return buildingList; }
-        private set { }
     }
 
     [SerializeField] private List<Attractor> attractors;
     public List<Attractor> Attractors
     {
         get { return attractors; }
-        private set { }
     }
 
 

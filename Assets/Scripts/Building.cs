@@ -30,13 +30,20 @@ public abstract class Building : MonoBehaviour
         protected set { _buildingName = value; }
     }
 
-    [SerializeField] protected Tile parentTile;
+    [SerializeField] protected Playerbase _owner;
+    public Playerbase Owner
+    {
+        get { return _owner; }
+        protected set { _owner = value; }
+    }
+
+    [SerializeField] protected Tile _parentTile;
     public Tile ParentTile
     {
-        get { return parentTile; }
+        get { return _parentTile; }
         protected set
         {
-            parentTile = value;
+            _parentTile = value;
         }
     }
 
@@ -63,10 +70,17 @@ public abstract class Building : MonoBehaviour
 
     protected TaskManager _tm = new TaskManager();
 
-    internal virtual void PlaceOnTile(Tile _tile)
+    internal virtual void PlaceOnTile(Tile tile)
     {
-        parentTile = _tile;
-        transform.position = _tile.transform.position + placementOffset;
+        _parentTile = tile;
+        transform.position = tile.transform.position + placementOffset;
+    }
+
+    internal virtual void PlaceOnTile(Tile tile, Playerbase owner)
+    {
+        _owner = owner;
+        _parentTile = tile;
+        transform.position = tile.transform.position + placementOffset;
     }
 
     internal virtual void OnPlacedOnTile() { }

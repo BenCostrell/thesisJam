@@ -49,9 +49,16 @@ public class Tile : MonoBehaviour
         {
             Debug.Assert(containedBuilding == null);
         }
-       
+
+        if(building.BuildingName == Building.BuildingType.MINE)
+        {
+            Debug.Assert(containedResource != null);
+            return;
+        }
+ 
         containedBuilding = building;
         building.PlaceOnTile(this);
+        
     }
 
 }

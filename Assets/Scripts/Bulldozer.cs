@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Bulldozer : Building
 {
-    internal override void PlaceOnTile(Tile tile)
+    internal override void PlaceOnTile(Tile _tile, Playerbase _owner)
     {
-        base.PlaceOnTile(tile);
+        base.PlaceOnTile(_tile, _owner);
         _buildingName = BuildingType.BULLDOZER;
-        parentTile = tile;
+        _parentTile = _tile;
         OnPlacedOnTile();
 
     }
 
     internal override void OnPlacedOnTile()
     {
-        if (parentTile.containedBuilding)
+        if (_parentTile.containedBuilding)
         {
-            Bulldoze(parentTile.containedBuilding);
+            Bulldoze(_parentTile.containedBuilding);
         }
     }
 
