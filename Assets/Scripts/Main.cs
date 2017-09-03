@@ -5,7 +5,6 @@ using UnityEngine;
 public class Main : Scene<TransitionData> {
 
     private Agent agent;
-	private Playerbase[] playerbases;
 
 	// Use this for initialization
 	void Start () {

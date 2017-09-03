@@ -8,11 +8,14 @@ public class Playerbase : MonoBehaviour {
 		have a reference to the player object;
 		if base is owned by player, start position is 0,0 if base is owned by player2, start position is 9,0
 	*/
+	
+	public int owner;
 
 	private Vector3 startPos;
  
-	public void Init(int width, int length)
+	public void Init(int width, int length, int owner_)
 	{
+ 		owner = owner_;
 		Material mat = GetComponent<MeshRenderer>().material;
 		if (width + length != 0) {
 			mat.color = Color.red;
@@ -24,6 +27,7 @@ public class Playerbase : MonoBehaviour {
 
 
  	void Start () {
+		Debug.Log("owner = " + owner);
 		transform.position = startPos;
 	}
 	
@@ -34,8 +38,7 @@ public class Playerbase : MonoBehaviour {
 	void OnTriggerEnter(Collider coll){
         if (coll.gameObject.GetComponent<Agent>() != null)
         {
-            Debug.Log("someone won!");
-            Services.SceneStackManager.Swap<WinScreen>();
+			Services.SceneStackManager.Swap<WinScreen>(new TransitionData(owner));
         }
 	}
 
