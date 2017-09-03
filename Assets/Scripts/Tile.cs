@@ -50,10 +50,14 @@ public class Tile : MonoBehaviour
             Debug.Assert(containedBuilding == null);
         }
 
+        Debug.Log(building.BuildingName);
+
         if(building.BuildingName == Building.BuildingType.MINE)
         {
-            Debug.Assert(containedResource != null);
-            return;
+            if (containedResource == null)
+            {
+                building.Demolish();
+            }
         }
  
         containedBuilding = building;

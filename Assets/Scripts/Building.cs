@@ -85,5 +85,5 @@ public abstract class Building : MonoBehaviour
 
     internal virtual void OnPlacedOnTile() { }
 
-    internal virtual void Demolish() { Destroy(this); }
+    internal virtual void Demolish() { Destroy(this.gameObject); }
 }
