@@ -107,5 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isActive: 0
   _buildingName: 0
-  _tile: {fileID: 0}
+  _owner: {fileID: 0}
+  _parentTile: {fileID: 0}
   _buildTimer: 0
+  cost: 5

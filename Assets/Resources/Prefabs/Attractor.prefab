@@ -198,4 +198,5 @@ MonoBehaviour:
   _owner: {fileID: 0}
   _parentTile: {fileID: 0}
   _buildTimer: 0
+  cost: 10
   isOn: 0
