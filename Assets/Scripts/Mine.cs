@@ -5,7 +5,7 @@ public class Mine : Building
     //  This class adds X amount of resource to the player
     //  every t seconds
 
-    private float resourceGenPeriod = 3.0f;
+    private float resourceGenPeriod = 1.5f;
 
     internal override void PlaceOnTile(Tile _tile, Playerbase _owner)
     {

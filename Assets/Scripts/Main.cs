@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main : Scene<TransitionData> {
 
     private Agent agent;
 
+	private Text resourceText;
+
 	// Use this for initialization
 	void Start () {
+		resourceText = GameObject.Find ("ResourceText").GetComponent<Text> ();
         Services.MapManager.GenerateMap();
 
 		IntVector2 center = Services.MapManager.CenterIndexOfGrid ();
@@ -18,6 +22,8 @@ public class Main : Scene<TransitionData> {
 	
 	// Update is called once per frame
 	void Update () {
+
+		resourceText.text = Services.GameManager.players [0].numResources.ToString () + "r";
 		
 	}
 

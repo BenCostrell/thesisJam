@@ -222,7 +222,7 @@ public class UI_Cursor : MonoBehaviour {
 				
 
 			} else {
-                TryToBuild(2);
+                TryToBuild(3);
 			}
 
 		}
@@ -233,7 +233,7 @@ public class UI_Cursor : MonoBehaviour {
 
 			} else {
 				if (Services.MapManager.map [X, Y].containedResource != null) {
-                    TryToBuild(3);
+                    TryToBuild(2);
 				}
 			}
 
