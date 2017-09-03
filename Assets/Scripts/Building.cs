@@ -68,6 +68,13 @@ public abstract class Building : MonoBehaviour
 
     }
 
+    [SerializeField] protected int cost;
+    public int Cost
+    {
+        get { return cost; }
+    }
+
+
     protected TaskManager _tm = new TaskManager();
 
     internal virtual void PlaceOnTile(Tile tile)

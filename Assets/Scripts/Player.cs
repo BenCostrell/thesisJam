@@ -19,10 +19,24 @@ public class Player {
             //resourceUI.text = value.ToString();
         }
     }
+    public List<Building> buildings { get; private set; }
 
     public Player(int playerNum_)
     {
         playerNum = playerNum_;
+        buildings = new List<Building>();
+    }
+
+    public void AddBuilding(Building building)
+    {
+        buildings.Add(building);
+        numResources -= building.Cost;
+    }
+
+    public bool CanAfford(Building building)
+    {
+        if (numResources >= building.Cost) return true;
+        else return false;
     }
 
 }

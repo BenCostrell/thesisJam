@@ -35,6 +35,7 @@ public class Construt : MonoBehaviour
         Debug.Log(tile.coord.x + ", " + tile.coord.y);
         tile.PlaceBuilding(newBuilding);
         newBuilding.PlaceOnTile(tile, owner);
+        Services.GameManager.players[owner.owner - 1].AddBuilding(newBuilding);
         Services.BuildingManager.AddBuilding(newBuilding);
         
     }
