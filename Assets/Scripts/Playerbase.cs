@@ -29,8 +29,7 @@ public class Playerbase : Attractor {
 
 
  	void Start () {
-		Debug.Log("owner = " + owner);
-		transform.position = startPos;
+ 		transform.position = startPos;
 	}
 	
  	void Update () {
