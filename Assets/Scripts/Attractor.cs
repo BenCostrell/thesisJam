@@ -10,7 +10,7 @@ public class Attractor : Building
     public bool IsOn
     {
         get { return isOn; }
-        protected set
+        set
         {
             isOn = value;
             if (!value)

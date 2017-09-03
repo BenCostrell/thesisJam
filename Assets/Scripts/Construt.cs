@@ -28,6 +28,11 @@ public class Construt : MonoBehaviour
         owner = GameObject.Find(PLAYER).GetComponent<Playerbase>();
 	}
 
+    public Building GetBuilding(int buildingIndex)
+    {
+        return Instantiate(Services.Prefabs.BuildingTypes[buildingIndex], Services.Main.transform).GetComponent<Building>();
+    }
+
     public void PlaceBuildingOnTile(int buildingIndex, Tile tile)
     {
         Building newBuilding = Instantiate(Services.Prefabs.BuildingTypes[buildingIndex], Services.Main.transform).GetComponent<Building>();
