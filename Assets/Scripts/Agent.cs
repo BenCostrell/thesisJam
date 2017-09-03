@@ -9,7 +9,8 @@ public class Agent : MonoBehaviour {
 
     private List<NavQuad> path;
 
-    private float speed = 0.001f;
+    private float baseSpeed = 0.001f;
+    private float speed;
     private float startTime;
     private float journeyLength;
     private Vector3 prevPos;
@@ -33,7 +34,7 @@ public class Agent : MonoBehaviour {
 	void Update () {
         
         if(path.Count != 0 && transform.position != path[0].position){
-            float distCovered = (Time.time - startTime) * speed;
+            float distCovered = (Time.time - startTime) * baseSpeed;
             journeyLength = Vector3.Distance(path[0].position, transform.position);
             /*if (path.Count > 1)
             {
@@ -58,4 +59,25 @@ public class Agent : MonoBehaviour {
         path = AStarSearch.ShortestPath(startNavQuad, endNavQuad, false);
 
     }
+
+    public void CalculatePath()
+    {
+        //Vector3 resultantForce = Vector3.zero;
+        //foreach (Attractor attractor in Services.BuildingManager.attractors)
+        //{
+        //    Vector3 differenceVector = attractor.transform.position - transform.position;
+        //    Vector3 differenceDirection = differenceVector.normalized;
+        //    float distance = differenceVector.magnitude;
+        //    Vector3 forceVector = differenceDirection * attractor.pullStrength *
+        //        (1 / Mathf.Pow(distance, 2));
+        //    resultantForce += forceVector;
+        //}
+        //Vector3 targetPos = transform.position + resultantForce;
+        //targetPos = new Vector3(
+        //    Mathf.Clamp(targetPos.x, 0, Services.MapManager.mapLength),
+        //    targetPos.y,
+        //    Mathf.Clamp(targetPos.z, 0, Services.MapManager.mapWidth));
+        //speed = resultantForce.magnitude * baseSpeed;
+    }
+            
 }
