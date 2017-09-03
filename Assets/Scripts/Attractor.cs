@@ -13,8 +13,17 @@ public class Attractor : Building
         protected set
         {
             isOn = value;
+            if (!value)
+            {
+                GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.grey;
+            }
+            else
+            {
+                GetComponentsInChildren<MeshRenderer>()[1].material.color = baseColor;
+            }
         }
     }
+    protected Color baseColor;
 
     public float AttractiveForce { get { return attractiveForce; } }
     protected float attractiveForce = 100.0f;
@@ -25,6 +34,8 @@ public class Attractor : Building
         _buildingName = BuildingType.ATTRACTOR;
         _parentTile = _tile;
         OnPlacedOnTile();
+        baseColor = GetComponentsInChildren<MeshRenderer>()[1].material.color;
+        IsOn = true;
     }
 
     internal override void OnPlacedOnTile()
@@ -34,6 +45,7 @@ public class Attractor : Building
 
     internal override void Demolish()
     {
+        Services.BuildingManager.Attractors.Remove(this);
         base.Demolish();
     }
 
