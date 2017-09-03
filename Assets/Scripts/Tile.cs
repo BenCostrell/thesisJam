@@ -47,22 +47,28 @@ public class Tile : MonoBehaviour
     {
         if(building.BuildingName != Building.BuildingType.BULLDOZER)
         {
-            Debug.Assert(containedBuilding == null);
+            //Debug.Assert(containedBuilding == null);
         }
 
-        Debug.Log(building.BuildingName);
+        if(building.BuildingName == Building.BuildingType.BULLDOZER && containedBuilding)
+        {
+            containedBuilding.Demolish();
+        }
 
         if(building.BuildingName == Building.BuildingType.MINE)
         {
             if (containedResource == null)
             {
-                building.Demolish();
+                Destroy(building.gameObject);
+                return;
             }
         }
- 
+
+        
         containedBuilding = building;
         building.PlaceOnTile(this);
-        
+
+
     }
 
 }
