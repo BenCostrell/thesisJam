@@ -17,8 +17,6 @@ public class MapManager : MonoBehaviour {
     private int maxTriesProcGen;
     private NavQuad[,] navQuads;
 
-
-
 	// Use this for initialization
 	void Start () {
 
@@ -30,27 +28,36 @@ public class MapManager : MonoBehaviour {
 	}
 
 
-	public void GenerateMap()
-	{
-		map =  new Tile[mapWidth,mapLength];
-		for (int i = 0; i < mapWidth; i++)
-		{
-			for (int j = 0; j < mapLength; j++)
-			{
-				Tile tile = Instantiate(Services.Prefabs.Tile, Services.Main.transform)
-					.GetComponent<Tile>();
-				tile.Init(new Coord(i, j));
-				map[i,j] = tile;
-			}
-		}
-		PlaceResources();
-		GenerateNavQuads();
-		PlaceBases ();
-	}
+    public void GenerateMap()
+    {
+        map = new Tile[mapWidth, mapLength];
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapLength; j++)
+            {
+                Tile tile = Instantiate(Services.Prefabs.Tile, Services.Main.transform)
+                    .GetComponent<Tile>();
+                tile.Init(new Coord(i, j));
+                map[i, j] = tile;
+            }
+        }
+        PlaceResources();
+        GenerateNavQuads();
+    }
 
-    Tile GetRandomTile()
+    public Tile GetRandomTile()
     {
 		return map[Random.Range(0, mapWidth), Random.Range(0, mapLength) ];
+    }
+
+    public Tile GetRandomEmptyTile()
+    {
+        Tile randomTile = GetRandomTile();
+        if(randomTile.containedBuilding)
+        {
+           randomTile = GetRandomTile();
+        }
+        return randomTile;
     }
 
     bool ValidateTile(Tile tile)

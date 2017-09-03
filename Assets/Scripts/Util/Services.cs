@@ -11,4 +11,5 @@ public static class Services {
     public static InputManager InputManager { get; set; }
     public static Main Main { get; set; }
     public static MapManager MapManager { get; set; }
+    public static BuildingManager BuildManager { get; set; }
 }

@@ -6,8 +6,16 @@ public class Road : Building
 
     internal override void PlaceOnTile(Tile tile)
     {
+        base.PlaceOnTile(tile);
         _buildingName = BuildingType.ROAD;
-        _tile = tile;
+        parentTile = tile;
+        OnPlacedOnTile();
+    }
+
+
+    internal override void OnPlacedOnTile()
+    {
+
     }
 
     internal override void Demolish()

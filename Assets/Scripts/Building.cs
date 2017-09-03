@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//  TODO: BUILDING MANAGER
+
 public abstract class Building : MonoBehaviour
 {
     public enum BuildingType
@@ -28,15 +30,17 @@ public abstract class Building : MonoBehaviour
         protected set { _buildingName = value; }
     }
 
-    [SerializeField] protected Tile _tile;
-    public Tile Tile
+    [SerializeField] protected Tile parentTile;
+    public Tile ParentTile
     {
-        get { return _tile; }
+        get { return parentTile; }
         protected set
         {
-            _tile = value;
+            parentTile = value;
         }
     }
+
+    private Vector3 placementOffset;
 
     [SerializeField] protected float _buildTimer;
     public float BuildTimer
@@ -59,7 +63,13 @@ public abstract class Building : MonoBehaviour
 
     protected TaskManager _tm = new TaskManager();
 
-    internal virtual void PlaceOnTile(Tile _tile) { }
+    internal virtual void PlaceOnTile(Tile _tile)
+    {
+        parentTile = _tile;
+        transform.position = _tile.transform.position + placementOffset;
+    }
+
+    internal virtual void OnPlacedOnTile() { }
 
     internal virtual void Demolish() { Destroy(this); }
 }

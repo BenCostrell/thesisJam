@@ -6,11 +6,18 @@ public class Bulldozer : Building
 {
     internal override void PlaceOnTile(Tile tile)
     {
+        base.PlaceOnTile(tile);
         _buildingName = BuildingType.BULLDOZER;
-        _tile = tile;
-        if(Tile.containedBuilding)
+        parentTile = tile;
+        OnPlacedOnTile();
+
+    }
+
+    internal override void OnPlacedOnTile()
+    {
+        if (parentTile.containedBuilding)
         {
-            Bulldoze(Tile.containedBuilding);
+            Bulldoze(parentTile.containedBuilding);
         }
     }
 

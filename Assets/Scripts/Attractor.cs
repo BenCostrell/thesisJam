@@ -5,12 +5,30 @@ using UnityEngine;
 public class Attractor : Building
 {
     //  This building attracts the agent using x amount of force
+    [SerializeField]
+    private bool isOn;
+    public bool IsOn
+    {
+        get { return isOn; }
+        protected set
+        {
+            isOn = value;
+        }
+    }
+
     private float attractiveForce = 1.0f;
-    
+
     internal override void PlaceOnTile(Tile tile)
     {
+        base.PlaceOnTile(tile);
         _buildingName = BuildingType.ATTRACTOR;
-        _tile = tile;
+        parentTile = tile;
+        OnPlacedOnTile();
+    }
+
+    internal override void OnPlacedOnTile()
+    {
+        
     }
 
     internal override void Demolish()

@@ -6,25 +6,58 @@ public class UI_Cursor : MonoBehaviour {
 
 	private float angle;
 
-	private int offsetX = 0;
-	private int maxX;
-	private int offsetY = 0;
-	private int maxY;
+	[SerializeField] private int offsetX = 0;
+    public int X
+    {
+        get { return offsetX; }
+        private set
+        {
+            offsetX = value;
+            if(offsetX < 0)
+            {
+                offsetX = 0;
+            }
+            else if (offsetX > maxX)
+            {
+                offsetX = maxX;
+            }
+        }
+    }
 
-	private bool usingAxis = false;
+	private int maxX;
+    [SerializeField] private int offsetY = 0;
+	private int maxY;
+    public int Y
+    {
+        get { return offsetY; }
+        private set
+        {
+            offsetY = value;
+            if (offsetY < 0)
+            {
+                offsetY = 0;
+            }
+            else if (offsetX > maxY)
+            {
+                offsetY = maxY;
+            }
+        }
+    }
+
+    private bool usingAxis = false;
 
 	private float t;
 	private float delay = 0.3f;
 
-
-	void Start () {
+    void Start () {
 		maxX = Services.MapManager.mapWidth - 1;
 		maxY = Services.MapManager.mapLength - 1;
 
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 
 		Vector3 tilePos = Services.GameManager.currentCamera.WorldToScreenPoint (Services.MapManager.map[offsetX,offsetY].transform.position);
 
@@ -32,7 +65,8 @@ public class UI_Cursor : MonoBehaviour {
 
 		float x = Input.GetAxisRaw("Horizontal");
 		float y = Input.GetAxisRaw("Vertical");
-		if (x != 0.0f || y != 0.0f) {
+		if (x != 0.0f || y != 0.0f)
+        {
 			
 			angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
 
@@ -63,7 +97,6 @@ public class UI_Cursor : MonoBehaviour {
 						offsetY--;
 						usingAxis = true;
 					}
-
 				}
 			} else if (angle >= 120 && angle <= 150) {
 				if ( offsetX < maxX) {
@@ -126,26 +159,21 @@ public class UI_Cursor : MonoBehaviour {
 					}
 				} 
 			}
-
-
-
-		} else {
+		}
+        else
+        {
 			usingAxis = false;
 		}
 
-		if (usingAxis) {
+        if (usingAxis)
+        {
 			t += Time.deltaTime;
 
-			if (t >= delay) {
+			if (t >= delay)
+            {
 				t = 0;
 				usingAxis = false;
 			}
 		}
-
-		
 	}
-		
-		
-
-
 }

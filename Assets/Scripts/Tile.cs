@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour {
+public class Tile : MonoBehaviour
+{
 
     public Coord coord { get; private set; }
     public Resource containedResource { get; private set; }

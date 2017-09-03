@@ -9,8 +9,14 @@ public class Mine : Building
 
     internal override void PlaceOnTile(Tile tile)
     {
+        base.PlaceOnTile(tile);
         _buildingName = BuildingType.MINE;
-        _tile = tile;
+        parentTile = tile;
+        OnPlacedOnTile();
+    }
+
+    internal override void OnPlacedOnTile()
+    {
         GenerateResource();
     }
 

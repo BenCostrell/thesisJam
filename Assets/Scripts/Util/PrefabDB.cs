@@ -24,4 +24,8 @@ public class PrefabDB : ScriptableObject {
 	private GameObject playerbase;
 	public GameObject Playerbase { get { return playerbase; }}
 
+    [SerializeField]
+    private GameObject[] buildingsTypes;
+    public GameObject[] BuildingTypes { get { return buildingsTypes; } }
+
 }
