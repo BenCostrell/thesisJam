@@ -12,7 +12,7 @@ public class Main : Scene<TransitionData> {
 
 		IntVector2 center = Services.MapManager.CenterIndexOfGrid ();
 
-		agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[center.x,center.y].gameObject.transform).GetComponent<Agent>();
+		agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[center.x, center.y].gameObject.transform.position, Quaternion.identity, Services.Main.transform).GetComponent<Agent>();
         agent.CalculatePath();
 	}
 	
