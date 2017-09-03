@@ -106,8 +106,6 @@ public class MapManager : MonoBehaviour {
 		Playerbase[] playerbases;
 		playerbases = new Playerbase[Services.GameManager.numPlayers];
 		for (int i = 0; i < Services.GameManager.numPlayers; i++) {
-			Debug.Log ("Map length is " + mapLength);
-			Debug.Log ("Map width is " + mapWidth);
 			playerbases[i] = Instantiate(Services.Prefabs.Playerbase, Services.Main.transform).GetComponent<Playerbase>();
 			playerbases [i].Init (0+(i*(mapWidth-1)), 0+(i*(mapLength-1)), Services.GameManager.players[i].playerNum);
  		}

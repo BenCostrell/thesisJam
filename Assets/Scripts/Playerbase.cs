@@ -29,8 +29,7 @@ public class Playerbase : MonoBehaviour {
 
 
  	void Start () {
-		Debug.Log("owner = " + owner);
-		transform.position = startPos;
+ 		transform.position = startPos;
 	}
 	
  	void Update () {
