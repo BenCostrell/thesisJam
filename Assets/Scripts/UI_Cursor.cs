@@ -208,7 +208,36 @@ public class UI_Cursor : MonoBehaviour {
 			} else {
 				Services.Construt.PlaceBuildingOnTile (0, Services.MapManager.map [X, Y]);
 			}
-//			buildingCursor.SetActive (true);
+
 		}
+
+		if (e.button == "A") {
+			Services.Construt.PlaceBuildingOnTile (1, Services.MapManager.map [X, Y]);
+
+	
+		}
+
+		if (e.button == "X") {
+			if (Services.MapManager.map [X, Y].containedBuilding != null) {
+				
+
+			} else {
+				Services.Construt.PlaceBuildingOnTile (2, Services.MapManager.map [X, Y]);
+			}
+
+		}
+
+		if (e.button == "Y") {
+			if (Services.MapManager.map [X, Y].containedBuilding != null) {
+
+
+			} else {
+				if (Services.MapManager.map [X, Y].containedResource != null) {
+					Services.Construt.PlaceBuildingOnTile (3, Services.MapManager.map [X, Y]);
+				}
+			}
+
+		}
+
 	}
 }
