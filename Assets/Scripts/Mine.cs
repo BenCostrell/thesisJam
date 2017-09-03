@@ -29,7 +29,7 @@ public class Mine : Building
     {
         //  Sends message to player to add one resource
         TaskTree genResourcesTaskTree = new TaskTree(new WaitTask(resourceGenPeriod));
-        Owner.numResources++;
+		Services.GameManager.players [Owner.owner - 1].numResources++;
         genResourcesTaskTree.Then(new ActionTask(GenerateResource));
         //  To do additional things just add more thens
         //  Add child to make other things happen as a result of a task

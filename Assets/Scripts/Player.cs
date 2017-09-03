@@ -18,6 +18,7 @@ public class Player {
         {
             numResources_ = value;
             //resourceUI.text = value.ToString();
+			Debug.Log(numResources);
         }
     }
     public List<Building> buildings { get; private set; }
