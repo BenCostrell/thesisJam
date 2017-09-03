@@ -11,7 +11,7 @@ public class Main : Scene<TransitionData> {
 	void Start () {
         Services.MapManager.GenerateMap();
 
-        agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[Services.MapManager.map.Count / 2].gameObject.transform).GetComponent<Agent>();
+        agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[Services.MapManager.CenterIndexOfGrid()].gameObject.transform).GetComponent<Agent>();
         agent.Walk();
 	}
 	

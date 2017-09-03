@@ -171,6 +171,14 @@ public class MapManager : MonoBehaviour {
         return closestNavQuad;
     }
 
+    public int CenterIndexOfGrid(){
+
+        int middle = mapWidth / 2;
+
+        int index = middle + mapWidth * middle;
+        return index;
+    }
+
 
 
 }
