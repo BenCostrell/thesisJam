@@ -206,13 +206,13 @@ public class UI_Cursor : MonoBehaviour {
 				}
 
 			} else {
-				Services.Construt.PlaceBuildingOnTile (0, Services.MapManager.map [X, Y]);
+                TryToBuild(0);
 			}
 
 		}
 
 		if (e.button == "A") {
-			Services.Construt.PlaceBuildingOnTile (1, Services.MapManager.map [X, Y]);
+            TryToBuild(1);
 
 	
 		}
@@ -222,7 +222,7 @@ public class UI_Cursor : MonoBehaviour {
 				
 
 			} else {
-				Services.Construt.PlaceBuildingOnTile (2, Services.MapManager.map [X, Y]);
+                TryToBuild(2);
 			}
 
 		}
@@ -233,11 +233,21 @@ public class UI_Cursor : MonoBehaviour {
 
 			} else {
 				if (Services.MapManager.map [X, Y].containedResource != null) {
-					Services.Construt.PlaceBuildingOnTile (3, Services.MapManager.map [X, Y]);
+                    TryToBuild(3);
 				}
 			}
 
 		}
 
 	}
+
+    void TryToBuild(int buildingIndex)
+    {
+        Building potentialBuilding = Services.Construt.GetBuilding(buildingIndex);
+        if (Services.GameManager.players[0].CanAfford(potentialBuilding))
+        {
+            Services.Construt.PlaceBuildingOnTile(buildingIndex, Services.MapManager.map[X, Y]);
+        }
+        Destroy(potentialBuilding.gameObject);
+    }
 }

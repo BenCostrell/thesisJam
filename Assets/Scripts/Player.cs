@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Player {
 
     public int playerNum;
-    [SerializeField] private int numResources_;
+    private int startingResources = 15;
+    private int numResources_;
     public int numResources
     {
         get
@@ -25,6 +26,7 @@ public class Player {
     {
         playerNum = playerNum_;
         buildings = new List<Building>();
+        numResources = startingResources;
     }
 
     public void AddBuilding(Building building)
