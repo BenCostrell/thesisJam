@@ -10,6 +10,7 @@ public class Playerbase : MonoBehaviour {
 	*/
 	
 	public int owner;
+	public Color winnerColor;
 
 	private Vector3 startPos;
  
@@ -18,10 +19,11 @@ public class Playerbase : MonoBehaviour {
  		owner = owner_;
 		Material mat = GetComponent<MeshRenderer>().material;
 		if (width + length != 0) {
-			mat.color = Color.red;
+			mat.color = Color.magenta;
 		} else {
-			mat.color = Color.blue;
+			mat.color = Color.cyan;
 		}
+		winnerColor = mat.color;
 		startPos = new Vector3 (width, 0.5f, length); 
  	}
 
@@ -38,7 +40,7 @@ public class Playerbase : MonoBehaviour {
 	void OnTriggerEnter(Collider coll){
         if (coll.gameObject.GetComponent<Agent>() != null)
         {
-			Services.SceneStackManager.Swap<WinScreen>(new TransitionData(owner));
+			Services.SceneStackManager.Swap<WinScreen>(new TransitionData(owner, winnerColor));
         }
 	}
 

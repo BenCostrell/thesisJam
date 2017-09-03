@@ -17,6 +17,7 @@ public class WinScreen : Scene<TransitionData> {
 	{  
 		Services.EventManager.Register<ButtonPressed>(StartGame);
 		winText.text = "Player " + data.winner + " won!";
+		winText.color = data.winnerColor;
 	}
 	// Update is called once per frame
 	void Update () {
