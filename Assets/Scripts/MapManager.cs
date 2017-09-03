@@ -43,6 +43,7 @@ public class MapManager : MonoBehaviour {
         }
         PlaceResources();
         GenerateNavQuads();
+        PlaceBases();
     }
 
     public Tile GetRandomTile()
@@ -110,6 +111,8 @@ public class MapManager : MonoBehaviour {
 			Debug.Log ("Map width is " + mapWidth);
 			playerbases[i] = Instantiate(Services.Prefabs.Playerbase, Services.Main.transform).GetComponent<Playerbase>();
 			playerbases [i].Init (0+(i*(mapWidth-1)), 0+(i*(mapLength-1)), Services.GameManager.players[i].playerNum);
+            playerbases[i].PlaceOnTile(map[0 + (i * (mapWidth - 1)), 0 + (i * (mapLength - 1))]);
+            Services.BuildingManager.AddBuilding(playerbases[i]);
  		}
 	}
 

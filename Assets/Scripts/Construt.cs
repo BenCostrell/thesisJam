@@ -31,7 +31,7 @@ public class Construt : MonoBehaviour
         Building newBuilding = Instantiate(Services.Prefabs.BuildingTypes[buildingIndex], Services.Main.transform).GetComponent<Building>();
 
         Debug.Log(tile.coord.x + ", " + tile.coord.y);
-        Services.BuildManager.AddBuilding(newBuilding);
+        Services.BuildingManager.AddBuilding(newBuilding);
         newBuilding.PlaceOnTile(tile);
     }
 

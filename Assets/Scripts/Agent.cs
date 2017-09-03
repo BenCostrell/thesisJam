@@ -17,13 +17,16 @@ public class Agent : MonoBehaviour {
     private Vector3 prevPos;
     private Vector3 targetPos;
     private bool pathStarted;
+    [SerializeField]
+    private float pathRecalculationPeriod;
+    private float timeSinceRecalculation;
 
 
     void Awake(){
         startingLocation = gameObject.transform.position;
         endLocation = new Vector3(7f, 0f, 8f);
         prevPos = startingLocation;
-
+        timeSinceRecalculation = 0;
         path = new List<NavQuad>();
     }
 
@@ -34,6 +37,16 @@ public class Agent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(timeSinceRecalculation >= pathRecalculationPeriod)
+        {
+            CalculatePath();
+            timeSinceRecalculation = 0;
+            pathStarted = false;
+        }
+        else
+        {
+            timeSinceRecalculation += Time.deltaTime;
+        }
         if (pathStarted && transform.position != targetPos)
         {
             timeElapsedBetweenNodes += Time.deltaTime;
@@ -46,7 +59,6 @@ public class Agent : MonoBehaviour {
             timeElapsedBetweenNodes = 0;
             expectedNodeJourneyDuration =
                 Vector3.Distance(targetPos, transform.position) / speed;
-            Debug.Log(expectedNodeJourneyDuration);
             prevPos = transform.position;
             path.Remove(path[0]);
             pathStarted = true;
@@ -67,25 +79,27 @@ public class Agent : MonoBehaviour {
 
     public void CalculatePath()
     {
-        //Vector3 resultantForce = Vector3.zero;
-        //foreach (Attractor attractor in Services.BuildingManager.attractors)
-        //{
-        //    Vector3 differenceVector = attractor.transform.position - transform.position;
-        //    Vector3 differenceDirection = differenceVector.normalized;
-        //    float distance = differenceVector.magnitude;
-        //    Vector3 forceVector = differenceDirection * attractor.attractiveForce *
-        //        (1 / Mathf.Pow(distance, 2));
-        //    resultantForce += forceVector;
-        //}
-        //Vector3 targetPos = transform.position + resultantForce;
-        //targetPos = new Vector3(
-        //    Mathf.Clamp(targetPos.x, 0, Services.MapManager.mapLength),
-        //    targetPos.y,
-        //    Mathf.Clamp(targetPos.z, 0, Services.MapManager.mapWidth));
-        //speed = resultantForce.magnitude * baseSpeed;
-        //path = AStarSearch.ShortestPath(
-        //    Services.MapManager.GetNavQuadClosestToPosition(transform.position),
-        //    Services.MapManager.GetNavQuadClosestToPosition(targetPos));
+        Vector3 resultantForce = Vector3.zero;
+        foreach (Attractor attractor in Services.BuildingManager.Attractors)
+        {
+            Vector3 differenceVector = attractor.transform.position - transform.position;
+            Vector3 differenceDirection = differenceVector.normalized;
+            float distance = differenceVector.magnitude;
+            Vector3 forceVector = differenceDirection * attractor.AttractiveForce *
+                (1 / Mathf.Pow(distance, 2));
+            resultantForce += forceVector;
+            Debug.Log("adding force " + resultantForce);
+        }
+        Vector3 targetPos = transform.position + resultantForce;
+        targetPos = new Vector3(
+            Mathf.Clamp(targetPos.x, 0, Services.MapManager.mapLength),
+            targetPos.y,
+            Mathf.Clamp(targetPos.z, 0, Services.MapManager.mapWidth));
+        speed = resultantForce.magnitude * baseSpeed;
+        path = AStarSearch.ShortestPath(
+            Services.MapManager.GetNavQuadClosestToPosition(transform.position),
+            Services.MapManager.GetNavQuadClosestToPosition(targetPos), false);
+        Debug.Log("speed is " + speed + "\n target is " + targetPos);
     }
             
 }

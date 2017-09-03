@@ -16,7 +16,8 @@ public class Attractor : Building
         }
     }
 
-    private float attractiveForce = 1.0f;
+    public float AttractiveForce { get { return attractiveForce; } }
+    private float attractiveForce = 100.0f;
 
     internal override void PlaceOnTile(Tile tile)
     {

@@ -13,7 +13,7 @@ public class Main : Scene<TransitionData> {
 		IntVector2 center = Services.MapManager.CenterIndexOfGrid ();
 
 		agent = Instantiate(Services.Prefabs.Agent, Services.MapManager.map[center.x,center.y].gameObject.transform).GetComponent<Agent>();
-        agent.Walk();
+        agent.CalculatePath();
 	}
 	
 	// Update is called once per frame
@@ -25,6 +25,7 @@ public class Main : Scene<TransitionData> {
     {
         Services.Main = this;
         Services.MapManager = GetComponentInChildren<MapManager>();
+        Services.BuildingManager = GetComponentInChildren<BuildingManager>();
     }
 
 		

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Playerbase : MonoBehaviour {
+public class Playerbase : Attractor {
 
 	/*
 		have a reference to the player object;
