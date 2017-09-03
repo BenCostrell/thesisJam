@@ -82,13 +82,16 @@ public class Agent : MonoBehaviour {
         Vector3 resultantForce = Vector3.zero;
         foreach (Attractor attractor in Services.BuildingManager.Attractors)
         {
-            Vector3 differenceVector = attractor.transform.position - transform.position;
-            Vector3 differenceDirection = differenceVector.normalized;
-            float distance = Mathf.Max(differenceVector.magnitude, 0.1f);
-            Vector3 forceVector = differenceDirection * attractor.AttractiveForce *
-                (1 / Mathf.Pow(distance, 1));
-            resultantForce += forceVector;
-            Debug.Log("adding force " + resultantForce);
+            if (attractor.IsOn)
+            {
+                Vector3 differenceVector = attractor.transform.position - transform.position;
+                Vector3 differenceDirection = differenceVector.normalized;
+                float distance = Mathf.Max(differenceVector.magnitude, 0.1f);
+                Vector3 forceVector = differenceDirection * attractor.AttractiveForce *
+                    (1 / Mathf.Pow(distance, 0.25f));
+                resultantForce += forceVector;
+                Debug.Log("adding force " + resultantForce);
+            }
         }
         Vector3 targetPos = transform.position + resultantForce;
         targetPos = new Vector3(
