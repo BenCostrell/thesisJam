@@ -10,12 +10,12 @@ public class Attractor : Building
     public bool IsOn
     {
         get { return isOn; }
-        protected set
+        set
         {
             isOn = value;
             if (!value)
             {
-                GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.grey;
+                GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.yellow;
             }
             else
             {
